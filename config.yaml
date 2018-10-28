@@ -1,0 +1,47 @@
+routes:
+  /chrome:
+    path: /chrome
+    conditions:
+      - User-Agent has Chrome
+      # Timestamp format: RFC3339
+      # 2006-01-02T15:04:05+01:00
+      # 2006-01-02T15:04:05-04:00
+      - Time lt 2018-10-28T20:00:00+01:00
+      - Time gt 2018-10-28T10:00:00+01:00
+    allowed_methods:
+      - GET
+      - POST
+    success_redirect: /panel
+    failure_redirect: /bye
+    redirect_status: 302
+
+  /firefox:
+    path: /firefox
+    conditions:
+      - User-Agent has Firefox
+
+      - Time lt 2018-10-28T20:00:00+01:00
+      - Time gt 2018-10-28T10:00:00+01:00
+    allowed_methods:
+      - GET
+    success_redirect: /panel
+    failure_redirect: /bye
+    redirect_status: 302
+
+  /firefox2:
+    path: /firefox_two
+    conditions:
+      - User-Agent has Firefox
+
+      - Time lt 2018-10-28T23:00:00+01:00
+      - Time gt 2018-10-28T22:00:00+01:00
+    allowed_methods:
+      - GET
+    success_redirect: /panel
+    failure_redirect: /bye
+    redirect_status: 302
+
+address: :8080
+debug: false
+# not_found_redirect: /bye
+# not_found_redirect_status: 302
